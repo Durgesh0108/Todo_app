@@ -8,7 +8,6 @@ export const TodoForm = () => {
 	// 	queryFn: () => updateTodo()
 	// })
 
-	
 	const addTodo = async (e) => {
 		e.preventDefault();
 		let headersList = {
@@ -22,15 +21,17 @@ export const TodoForm = () => {
 		console.log(taskData);
 		let bodyContent = JSON.stringify(taskData);
 
-		let response = await fetch("http://127.0.0.1:3001/todo", {
-			method: "POST",
-			body: bodyContent,
-			headers: headersList,
-		});
+		let response = await fetch(
+			"https://todoapplication-fcc621cd0a7d.herokuapp.com/todo",
+			{
+				method: "POST",
+				body: bodyContent,
+				headers: headersList,
+			}
+		);
 
 		let data = await response.json();
 		console.log(data);
-		
 	};
 
 	return (

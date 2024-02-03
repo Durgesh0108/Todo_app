@@ -26,10 +26,13 @@ export const TodoList = () => {
 			// "User-Agent": "Thunder Client (https://www.thunderclient.com)",
 			// https://todoapplication-fcc621cd0a7d.herokuapp.com/todo
 		};
-		let response = await fetch("http://localhost:3001/todo", {
-			method: "GET",
-			headers: headersList,
-		});
+		let response = await fetch(
+			"https://todoapplication-fcc621cd0a7d.herokuapp.com/todo",
+			{
+				method: "GET",
+				headers: headersList,
+			}
+		);
 
 		let { tasks } = await response.json();
 		console.log(tasks);
@@ -51,11 +54,14 @@ export const TodoList = () => {
 			id: id,
 		});
 
-		let response = await fetch("http://127.0.0.1:3001/todo", {
-			method: "PATCH",
-			body: bodyContent,
-			headers: headersList,
-		});
+		let response = await fetch(
+			"https://todoapplication-fcc621cd0a7d.herokuapp.com/todo",
+			{
+				method: "PATCH",
+				body: bodyContent,
+				headers: headersList,
+			}
+		);
 	};
 
 	const deleteTask = async (id) => {
@@ -68,11 +74,14 @@ export const TodoList = () => {
 		let bodyContent = JSON.stringify({
 			id: id,
 		});
-		let response = await fetch("http://127.0.0.1:3001/todo", {
-			method: "DELETE",
-			body: bodyContent,
-			headers: headersList,
-		});
+		let response = await fetch(
+			"https://todoapplication-fcc621cd0a7d.herokuapp.com/todo",
+			{
+				method: "DELETE",
+				body: bodyContent,
+				headers: headersList,
+			}
+		);
 	};
 	// // console.log(data)
 	// let newTaskData = data;
