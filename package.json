@@ -1,0 +1,16 @@
+{
+  "name": "rentkar-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm run dev --prefix backend",
+    "client": "npm run dev --prefix my-project",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
