@@ -8,6 +8,7 @@ export const TodoForm = () => {
 	// 	queryFn: () => updateTodo()
 	// })
 
+	
 	const addTodo = async (e) => {
 		e.preventDefault();
 		let headersList = {
@@ -29,6 +30,7 @@ export const TodoForm = () => {
 
 		let data = await response.json();
 		console.log(data);
+		
 	};
 
 	return (

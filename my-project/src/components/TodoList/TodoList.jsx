@@ -24,6 +24,7 @@ export const TodoList = () => {
 		let headersList = {
 			Accept: "*/*",
 			// "User-Agent": "Thunder Client (https://www.thunderclient.com)",
+			// https://todoapplication-fcc621cd0a7d.herokuapp.com/todo
 		};
 		let response = await fetch("http://localhost:3001/todo", {
 			method: "GET",
