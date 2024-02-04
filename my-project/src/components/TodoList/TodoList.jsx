@@ -1,61 +1,35 @@
 import React, { useCallback, useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoList } from "../../utils/http";
+import { taskActions } from "../../store";
+import { updateTask } from "../../store/task-actions";
 
 export const TodoList = () => {
-	const [TodoTask, setTodoTask] = useState([]);
-	// const { data, isLoading } = useQuery({
-	// 	queryKey: ["task"],
-	// 	queryFn: fetchTodoList,
-	// });
+	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	if (data) {
-	// 		console.log("useeffect", data.tasks);
-	// 		setTodoTask(data.tasks);
-	// 	}
-	// }, [data]);
-	// console.log("refetching")
-	// cnst
-	// console.log("TodoList", data.status);
-	// setTodoTask(tasks);
-	const fetchTodoList = async () => {
-		let headersList = {
-			Accept: "*/*",
-			// "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-			// https://todoapplication-fcc621cd0a7d.herokuapp.com/todo
-		};
-		let response = await fetch("http://localhost:3001/todo", {
-			method: "GET",
-			headers: headersList,
-		});
+	const tasks = useSelector((state) => state.task);
+	console.log("todolist", tasks);
 
-		let { tasks } = await response.json();
-		console.log(tasks);
-		setTodoTask(tasks);
-	};
-	fetchTodoList();
-	// console.log(TodoTask);
-	// useEffect(() => {
-	// 	fetchTodoList2();
-	// }, []);
+	const update = async (id) => {
+		dispatch(taskActions.updateTask({ updateId: id }));
+		dispatch(updateTask(id));
+		// let headersList = {
+		// 	Accept: "*/*",
+		// 	"Content-Type": "application/json",
+		// };
 
-	const updateTodo = async (id) => {
-		let headersList = {
-			Accept: "*/*",
-			"Content-Type": "application/json",
-		};
+		// let bodyContent = JSON.stringify({
+		// 	id: id,
+		// });
 
-		let bodyContent = JSON.stringify({
-			id: id,
-		});
-
-		let response = await fetch("http://127.0.0.1:3001/todo", {
-			method: "PATCH",
-			body: bodyContent,
-			headers: headersList,
-		});
+		// let response = await fetch("http://127.0.0.1:3001/todo", {
+		// 	method: "PATCH",
+		// 	body: bodyContent,
+		// 	headers: headersList,
+		// });
 	};
 
 	const deleteTask = async (id) => {
@@ -82,15 +56,8 @@ export const TodoList = () => {
 
 	return (
 		<div className="flex flex-col gap-1 w-3/4">
-			{/* <h1>Task</h1> */}
-			{/* <ul>
-				{Task.map((task) => (
-					<li>{task._id}</li>
-				))}
-			</ul> */}
-			{/* {isLoading && <p className="text-white text-2xl ">Loading...</p>} */}
-			{TodoTask.length > 0 ? (
-				TodoTask.map((task) => (
+			{tasks.tasks.length > 0 ? (
+				tasks.tasks.map((task) => (
 					<div
 						key={task._id}
 						className="bg-[#444444] p-6 flex justify-between items-center"
@@ -107,8 +74,9 @@ export const TodoList = () => {
 							</h3>
 							<p
 								className={`text-white text-lg m ${
-									task.completed &&
-									"line-through text-gray-400"
+									task.completed
+										? "line-through text-gray-400"
+										: ""
 								}`}
 							>
 								{task.description}
@@ -118,7 +86,7 @@ export const TodoList = () => {
 							{!task.completed && (
 								<button
 									className="rounded-full py-2 px-4 bg-white text-green-500 border-green-500 border-2"
-									onClick={() => updateTodo(task._id)}
+									onClick={() => update(task._id)}
 								>
 									Complete
 								</button>

@@ -63,19 +63,6 @@ app.use((req, res, next) => {
 app.use("/", userRouter);
 app.use("/todo", todoRouter);
 
-app.get("/api/todo", async (req, res, next) => {
-	const todos = await Task.find();
-	res.json(todos);
-});
-// app.get("/", (req, res) => {
-// 	res.send("Hello");
-// });
-
-// app.post("/router", (req, res, next) => {
-// 	console.log(req.body);
-// 	res.json(req.body);
-// });
-
 app.all("*", (req, res, next) => {
 	next(new ExpressError("Page Not Found", 404));
 });
