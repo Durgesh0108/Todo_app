@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import { TodoForm } from "./components/TodoForm/TodoForm";
 import { TodoList } from "./components/TodoList/TodoList";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, deleteTask, fetchTaskData, updateTask } from "./store/task-actions";
+import {
+	addTask,
+	deleteTask,
+	fetchTaskData,
+	updateTask,
+} from "./store/task-actions";
 
 let isInitial = true;
 
@@ -49,8 +54,8 @@ function App() {
 			return;
 		}
 		dispatch(updateTask(task.updateId));
-	}, [ task.updateId, dispatch ]);
-	
+	}, [task.updateId, dispatch]);
+
 	useEffect(() => {
 		if (task.deleteId === "") {
 			// updateinitial = false;

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { fetchTodoList } from "../../utils/http";
 import { taskActions } from "../../store";
-import { updateTask } from "../../store/task-actions";
+import { updateTask,deleteTask} from "../../store/task-actions";
 
 export const TodoList = () => {
 	const dispatch = useDispatch();
@@ -13,9 +13,11 @@ export const TodoList = () => {
 	const tasks = useSelector((state) => state.task);
 	console.log("todolist", tasks);
 
-	const update = async (id) => {
+	const update = async (id) =>
+	{
 		dispatch(taskActions.updateTask({ updateId: id }));
 		dispatch(updateTask(id));
+	}
 		// let headersList = {
 		// 	Accept: "*/*",
 		// 	"Content-Type": "application/json",
@@ -23,18 +25,22 @@ export const TodoList = () => {
 
 		// let bodyContent = JSON.stringify({
 		// 	id: id,
-		// });
+		const deleteTodo=async(id) => {
+			dispatch(taskActions.deleteTask({ deleteId: id }));
+			dispatch(deleteTask(id));
+	}
+
 
 		// let response = await fetch("http://127.0.0.1:3001/todo", {
 		// 	method: "PATCH",
 		// 	body: bodyContent,
 		// 	headers: headersList,
 		// });
-	};
+	
 
-	const deleteTask = async (id) => {
+/*const deleteTask = async (id) => {
 		let headersList = {
-			Accept: "*/*",
+			//Accept: "",
 			"User-Agent": "Thunder Client (https://www.thunderclient.com)",
 			"Content-Type": "application/json",
 		};
@@ -47,7 +53,7 @@ export const TodoList = () => {
 			body: bodyContent,
 			headers: headersList,
 		});
-	};
+	};*/
 	// // console.log(data)
 	// let newTaskData = data;
 	// console.log(newTaskData);
@@ -92,7 +98,7 @@ export const TodoList = () => {
 								</button>
 							)}
 							<button
-								onClick={() => deleteTask(task._id)}
+								onClick={() => deleteTodo(task._id)}
 								className="rounded-full py-2 px-4 bg-white text-red-500 border-red-500 border-2"
 							>
 								Delete
