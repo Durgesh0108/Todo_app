@@ -13,39 +13,19 @@ function App() {
 	console.log("task", task.id);
 	console.log("data", data);
 
-	// let updateinitial = true;
-
 	useEffect(() => {
-		console.log("rerun");
-
 		dispatch(fetchTaskData());
 	}, [dispatch, data.name]);
-	// dispatch(fetchTaskData());
-	// setInterval(() => {
-	// 	console.log("rerun");
-	// }, 2000);
 
 	useEffect(() => {
 		if (data.name === "" || data.description === "") {
 			return;
 		}
 		dispatch(addTask(data));
-	}, [data, dispatch]);
-
-	// update
-	// const handleUpdateTodo = (id) => {
-	// 	dispatch(updateTask({ id }));
-	// };
-
-	// if (task.id === "") {
-	// 	// updateinitial = false;
-	// 	return;
-	// } else {
-	// 	dispatch(updateTask(task.id));
-	// }
+	}, [ data, dispatch ]);
+	
 	useEffect(() => {
 		if (task.updateId === "") {
-			// updateinitial = false;
 			return;
 		}
 		dispatch(updateTask(task.updateId));
@@ -53,7 +33,6 @@ function App() {
 	
 	useEffect(() => {
 		if (task.deleteId === "") {
-			// updateinitial = false;
 			return;
 		}
 		dispatch(deleteTask(task.deleteId));
@@ -64,7 +43,7 @@ function App() {
 			<div className="bg-[#333333] flex flex-col gap-8 py-16 items-center min-h-screen w-full">
 				<h1 className="text-white text-6xl font-semibold">My Todo</h1>
 				<TodoForm />
-				<TodoList updateTodo={() => handleUpdateTodo(task.id)} />
+				<TodoList />
 			</div>
 		</>
 	);
