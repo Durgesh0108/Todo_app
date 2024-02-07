@@ -2,41 +2,15 @@ import { useEffect } from "react";
 import { TodoForm } from "./components/TodoForm/TodoForm";
 import { TodoList } from "./components/TodoList/TodoList";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, deleteTask, fetchTaskData, updateTask } from "./store/task-actions";
-
-let isInitial = true;
+import { fetchTaskData } from "./store/actions";
 
 function App() {
 	const dispatch = useDispatch();
-	const data = useSelector((state) => state.data);
-	const task = useSelector((state) => state.task);
-	console.log("task", task.id);
+	const data = useSelector((state) => state.task.data);
 	console.log("data", data);
-
 	useEffect(() => {
 		dispatch(fetchTaskData());
-	}, [dispatch, data.name]);
-
-	useEffect(() => {
-		if (data.name === "" || data.description === "") {
-			return;
-		}
-		dispatch(addTask(data));
-	}, [ data, dispatch ]);
-	
-	useEffect(() => {
-		if (task.updateId === "") {
-			return;
-		}
-		dispatch(updateTask(task.updateId));
-	}, [ task.updateId, dispatch ]);
-	
-	useEffect(() => {
-		if (task.deleteId === "") {
-			return;
-		}
-		dispatch(deleteTask(task.deleteId));
-	}, [task.deleteId, dispatch]);
+	}, [dispatch, data]);
 
 	return (
 		<>

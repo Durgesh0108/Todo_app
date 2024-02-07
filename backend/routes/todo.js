@@ -26,9 +26,9 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/", async (req, res, next) => {
-	const { id } = req.body;
+	const { _id } = req.body;
 	try {
-		const task = await Task.findByIdAndDelete(id);
+		const task = await Task.findByIdAndDelete(_id);
 		if (!task)
 			return res.json({
 				status: "failure",
@@ -41,13 +41,6 @@ router.delete("/", async (req, res, next) => {
 	} catch (e) {
 		console.log(e);
 	}
-	const task = await Task.findByIdAndDelete(_id);
-	if (!task)
-		return res.json({ status: "failure", message: "No such task found" });
-	return res.json({
-		status: "success",
-		data: task,
-	});
 });
 
 router.patch("/", async (req, res, next) => {
