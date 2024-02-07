@@ -85,7 +85,7 @@ export const deleteTask = (id) => {
 			};
 
 			let bodyContent = JSON.stringify({
-				_id:id
+				_id: id,
 			});
 			let response = await fetch("http://127.0.0.1:3001/todo", {
 				method: "DELETE",

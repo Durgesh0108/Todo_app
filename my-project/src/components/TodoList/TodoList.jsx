@@ -1,25 +1,21 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchTodoList } from "../../utils/http";
-import { taskActions } from "../../store";
-import { updateTask, deleteTask } from "../../store/task-actions";
+
+import { deleteTask, updateTask } from "../../store/actions";
+
 
 export const TodoList = () => {
 	const dispatch = useDispatch();
 
 	const tasks = useSelector((state) => state.task);
-	console.log("todolist", tasks);
 
-	const update = async (id) => {
-		dispatch(taskActions.updateTask({ updateId: id }));
+	const updateTodo = async (id) => {
 		dispatch(updateTask(id));
 	};
 
 	const deleteTodo = async (id) => {
-		dispatch(taskActions.deleteTask({ deleteId: id }));
 		dispatch(deleteTask(id));
 	};
 
@@ -55,7 +51,7 @@ export const TodoList = () => {
 							{!task.completed && (
 								<button
 									className="rounded-full py-2 px-4 bg-white text-green-500 border-green-500 border-2"
-									onClick={() => update(task._id)}
+									onClick={() => updateTodo(task._id)}
 								>
 									Complete
 								</button>
